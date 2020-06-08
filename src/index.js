@@ -13,17 +13,16 @@ let idCount = links.length;
 const resolvers = {
     Query : {
         info : () => `GraphQl `,
-        feed : () => links
+        feed : () => (root, args, context, info) => {
+            return context.prisma.links()
+        }
     },
     Mutation : {
-        post : (parent, args) => {
-            const link = {
-                id : `link- ${idCount++}`,
-                description : args.description,
-                url : args.url
-            }
-            links.push(link);
-            return link;
+        post : (root, args, context) => {
+            return context.prisma.createLink({
+                url : args.url,
+                description : args.description
+            })
         }
     }
 }

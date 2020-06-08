@@ -1,0 +1,9 @@
+
+#endpoint : ''
+endpoint: https://eu1.prisma.sh/burkey-5b4b05/testServer/dev
+
+datamodel : datamodel.prisma
+
+generate : 
+  - generator : javascript-client
+    output: ../src/generated/prisma-client
